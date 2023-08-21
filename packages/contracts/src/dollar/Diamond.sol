@@ -19,7 +19,7 @@ struct DiamondArgs {
 
 /**
  * @notice Contract that implements diamond proxy pattern
- * @dev Main protocol's entrypoint 7
+ * @dev Main protocol's entrypoint 8
  */
 contract Diamond {
     /**
