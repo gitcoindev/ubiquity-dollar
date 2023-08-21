@@ -37,12 +37,8 @@ jobs:
         run: forge install
 
       - name: Deep Fuzz Solidity Contracts
+        working-directory: packages/contracts
         run: |
-          cd packages/contracts
-          pwd
-          for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-            echo "$file was changed"
-          done
           if ${{ github.event_name == 'pull_request' }}; then
             forge test
           fi
@@ -53,5 +49,7 @@ jobs:
               echo "Searching for $f related tests"
               forge tree | grep -E "^test|^src|${f}" | grep -B1 ${f} | grep ^test | cut -d' ' -f1 >> fuzz.txt
             done
+            echo "Tests found:"
+            cat fuzz.txt | sort | uniq -u
             cat fuzz.txt | sort | uniq -u | xargs -I{} forge test --match-path {}
           fi
