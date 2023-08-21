@@ -45,11 +45,10 @@ jobs:
           if ${{ github.event_name == 'push' }}; then
             touch fuzz.txt
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              echo "${file} was changed"
               f=$(basename -- $file)
-              echo "Searching for $f related tests"
               forge tree | grep -E "^test|^src|${f}" | grep -B1 ${f} | grep ^test | cut -d' ' -f1 >> fuzz.txt
             done
-            echo "Tests found:"
-            cat fuzz.txt | sort | uniq -u
+            cat fuzz.txt
             cat fuzz.txt | sort | uniq -u | xargs -I{} forge test --match-path {}
           fi
