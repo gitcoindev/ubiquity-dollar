@@ -27,6 +27,7 @@ jobs:
           version: nightly-d369d2486f85576eec4ca41d277391dfdae21ba7
 
       - name: Get changed files
+        id: changed-files
         uses: tj-actions/changed-files@v37
 
       - name: Deep Fuzz Solidity Contracts
