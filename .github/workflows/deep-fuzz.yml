@@ -33,6 +33,7 @@ jobs:
           files: packages/contracts/src/**
 
       - name: Forge install
+        working-directory: packages/contracts
         run: forge install
 
       - name: Deep Fuzz Solidity Contracts
