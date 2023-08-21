@@ -34,10 +34,15 @@ jobs:
               cd packages/contracts
               pwd
               echo ${{ steps.files.outputs.added_modified }}
-              if ${{ github.event_name == 'pull_request' }}:
+              echo "---------------------------"
+              echo ${{ github.event_name }}
+              echo "---------------------------"
+              if ${{ github.event_name == 'pull_request' }}; then
                 forge test
-              if ${{ github.event_name == 'push' }}:
+              fi
+              if ${{ github.event_name == 'push' }}; then
                 mapfile -d ',' -t files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
                 for f in "${files[@]}"; do
                   echo "Do something with this ${f}."
                 done
+              fi
