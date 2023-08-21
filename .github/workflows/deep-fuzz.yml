@@ -43,6 +43,10 @@ jobs:
             forge test
           fi
           if ${{ github.event_name == 'push' }}; then
+            if -n ${{ steps.changed-files.outputs.all_changed_files }}; then
+              echo "No Solidity contracts were modified, skipping deep fuzzing..."
+              exit 0
+            fi
             touch fuzz.txt
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
               echo "${file} was changed"
