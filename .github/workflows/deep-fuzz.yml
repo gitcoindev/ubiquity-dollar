@@ -39,14 +39,13 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
-          echo "---------------------------"
-          echo ${{ github.event_name }}
-          echo "---------------------------"
           if ${{ github.event_name == 'pull_request' }}; then
             forge test
           fi
           if ${{ github.event_name == 'push' }}; then
             for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-              echo "$file was changed"
+              f=$(basename -- $file)
+              forge tree | grep -E "^test|^src|${f}" | grep -B1 ${f} | grep ^test | cut -d' ' -f1 >> fuzz.txt
             done
+            cat fuzz.txt | sort | uniq -u
           fi
