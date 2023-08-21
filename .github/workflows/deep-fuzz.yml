@@ -24,9 +24,6 @@ jobs:
         with:
           version: nightly-d369d2486f85576eec4ca41d277391dfdae21ba7
 
-      - name: Setup Forge
-        run: yarn workspace @ubiquity/contracts forge:install
-
       - name: Deep Fuzz Solidity Contracts      
         uses: jitterbit/get-changed-files@v1
         with:
