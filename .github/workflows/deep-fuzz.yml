@@ -49,6 +49,7 @@ jobs:
               f=$(basename -- $file)
               forge tree | grep -E "^test|^src|${f}" | grep -B1 ${f} | grep ^test | cut -d' ' -f1 >> fuzz.txt
             done
+            echo "Deep fuzzing:"
             cat fuzz.txt
             cat fuzz.txt | sort | uniq -u | xargs -I{} forge test --match-path {}
           fi
