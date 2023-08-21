@@ -32,6 +32,9 @@ jobs:
         with:
           files: packages/contracts/src/**
 
+      - name: Forge install
+        run: forge install
+
       - name: Deep Fuzz Solidity Contracts
         run: |
           cd packages/contracts
@@ -39,7 +42,6 @@ jobs:
           for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
             echo "$file was changed"
           done
-          forge install
           if ${{ github.event_name == 'pull_request' }}; then
             forge test
           fi
