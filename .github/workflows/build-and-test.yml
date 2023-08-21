@@ -42,6 +42,22 @@ jobs:
       - name: Test All
         run: yarn test:all
 
+      - name: Deep Fuzz Solidity Contracts      
+        uses: jitterbit/get-changed-files@v1
+        with:
+          format: 'csv'
+        env:
+          FOUNDRY_PROFILE: intense
+          run: |
+              cd packages/contracts
+              if ${{ github.event_name == 'pull_request' }}:
+                forge test
+              if ${{ github.event_name == 'push' }}:
+                mapfile -d ',' -t files < <(printf '%s,' '${{ steps.files.outputs.added_modified }}')
+                for f in "${files[@]}"; do
+                  echo "Do something with this ${f}."
+                done
+
       - name: Prepare Deployment Artifact
         env:
           EVENT_NAME: ${{github.event_name}}
