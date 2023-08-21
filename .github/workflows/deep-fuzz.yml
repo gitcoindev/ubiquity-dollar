@@ -24,24 +24,26 @@ jobs:
         with:
           version: nightly-d369d2486f85576eec4ca41d277391dfdae21ba7
 
-      - name: Deep Fuzz Solidity Contracts      
+      - name: Get changed files
         uses: tj-actions/changed-files@v37
+
+      - name: Deep Fuzz Solidity Contracts
         env:
-          FOUNDRY_PROFILE: intense
+          FOUNDRY_PROFILE: intense       
           run: |
-              cd packages/contracts
-              pwd
+            cd packages/contracts
+            pwd
+            for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
+              echo "$file was changed"
+            done
+            echo "---------------------------"
+            echo ${{ github.event_name }}
+            echo "---------------------------"
+            if ${{ github.event_name == 'pull_request' }}; then
+              forge test
+            fi
+            if ${{ github.event_name == 'push' }}; then
               for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
                 echo "$file was changed"
               done
-              echo "---------------------------"
-              echo ${{ github.event_name }}
-              echo "---------------------------"
-              if ${{ github.event_name == 'pull_request' }}; then
-                forge test
-              fi
-              if ${{ github.event_name == 'push' }}; then
-                for file in ${{ steps.changed-files.outputs.all_changed_files }}; do
-                  echo "$file was changed"
-                done
-              fi
+            fi
