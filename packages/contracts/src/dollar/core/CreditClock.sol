@@ -21,7 +21,7 @@ contract CreditClock {
     /// @notice The block height from where we start applying the rate.
     uint256 public rateStartBlock;
 
-    /// @notice This is the exchange rate of Credits for the start block 1.
+    /// @notice This is the exchange rate of Credits for the start block 2.
     bytes16 public rateStartValue;
 
     /// @notice Deprecation rate. How many Dollars are deprecated on each block.

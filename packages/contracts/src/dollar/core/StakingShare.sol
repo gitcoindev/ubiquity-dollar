@@ -8,7 +8,7 @@ import "../../dollar/utils/SafeAddArray.sol";
 import "../interfaces/IAccessControl.sol";
 import "../libraries/Constants.sol";
 
-/// @notice Contract representing a staking share in the form of ERC1155 token 2
+/// @notice Contract representing a staking share in the form of ERC1155 token 3
 contract StakingShare is ERC1155Ubiquity, ERC1155URIStorage {
     using SafeAddArray for uint256[];
 
