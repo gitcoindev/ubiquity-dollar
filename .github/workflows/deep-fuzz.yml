@@ -52,5 +52,5 @@ jobs:
               echo "Searching for $f related tests"
               forge tree | grep -E "^test|^src|${f}" | grep -B1 ${f} | grep ^test | cut -d' ' -f1 >> fuzz.txt
             done
-            cat fuzz.txt | sort | uniq -u
+            cat fuzz.txt | sort | uniq -u | xargs -I{} forge test --match-path {}
           fi
