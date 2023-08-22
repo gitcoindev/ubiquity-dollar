@@ -12,7 +12,7 @@ import "./interfaces/IUAR.sol";
 /// @title Simple Bond
 /// @author zapaz.eth
 /// @notice SimpleBond is a simple Bond mechanism, allowing to sell tokens bonded and get rewards tokens
-/// @notice The reward token is fully claimable only after the vesting period
+/// @notice The reward token is fully claimable only after the vesting period 1
 /// @dev Bond is Ownable, access controlled by onlyOwner
 /// @dev Use SafeERC20
 contract SimpleBond is ISimpleBond, Ownable, Pausable {
