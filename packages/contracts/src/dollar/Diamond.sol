@@ -10,7 +10,7 @@ import {DiamondCutFacet} from "./facets/DiamondCutFacet.sol";
 import {DiamondLoupeFacet} from "./facets/DiamondLoupeFacet.sol";
 import {OwnershipFacet} from "./facets/OwnershipFacet.sol";
 
-/// @notice Struct used for `Diamond` constructor args
+/// @notice Struct used for `Diamond` constructor args 1
 struct DiamondArgs {
     address owner;
     address init;
