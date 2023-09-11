@@ -46,11 +46,9 @@ jobs:
         uses: onbjerg/foundry-toolchain@v1
         with:
           version: nightly
-
-      - name: Set working directory
-        working-directory: packages/contracts
         
       - name: Install storage layout
         uses: Rubilmax/foundry-storage-check@main
         with:
+          workingDirectory: packages/contracts
           contract: ${{ matrix.contract }}
