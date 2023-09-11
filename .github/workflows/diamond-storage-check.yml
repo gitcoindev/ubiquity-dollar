@@ -23,8 +23,8 @@ jobs:
       - id: set-matrix
         working-directory: packages/contracts
         run: |
-          echo "::set-output name=matrix::$(forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)"
-          echo "matrix=$(forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)" >> "$GITHUB_OUTPUT"
+          forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo "matrix={}" >> "$GITHUB_OUTPUT"
+          echo $GITHUB_OUTPUT
     
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
