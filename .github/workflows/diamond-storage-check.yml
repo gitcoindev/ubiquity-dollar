@@ -47,7 +47,7 @@ jobs:
         with:
           version: nightly
         
-      - name: Install storage layout
+      - name: Verify storage layout
         uses: Rubilmax/foundry-storage-check@main
         with:
           workingDirectory: packages/contracts
