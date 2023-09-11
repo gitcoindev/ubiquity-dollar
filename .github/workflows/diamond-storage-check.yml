@@ -23,9 +23,8 @@ jobs:
       - id: set-matrix
         working-directory: packages/contracts
         run: |
+          echo src/dollar/upgradeInitializers/DiamondInit.sol:DiamondInit >> contracts.txt
           forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo src/dollar/facets/{}.sol:{} >> contracts.txt
-          echo src/dollar/upgradeInitalizers/DiamondInit.sol:DiamondInit >> contracts.txt
-          echo src/dollar/DirectGovernanceFarmer.sol:DirectGovernanceFarmer >> contracts.txt
           echo "::set-output name=matrix::$(cat contracts.txt | jq -R -s -c 'split("\n")[:-1]')"
     
     outputs:
