@@ -24,6 +24,7 @@ jobs:
         working-directory: packages/contracts
         run: |
           echo "::set-output name=matrix::$(forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)"
+          echo "matrix=$(forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)" >> "$GITHUB_OUTPUT"
     
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
@@ -34,7 +35,7 @@ jobs:
 
     strategy:
       matrix:
-        contract: ${{ fromJson(needs.provide_contracts.outputs.matrix) }}
+        contract: ${{needs.provide_contracts.outputs.matrix}}
 
     steps:
       - uses: actions/checkout@v3
