@@ -23,9 +23,7 @@ jobs:
       - id: set-matrix
         working-directory: packages/contracts
         run: |
-          echo "contracts"
           echo "::set-output name=matrix::$(forge tree | grep -E "^src/dollar/facets" | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)"
-          echo $matrix
     
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
