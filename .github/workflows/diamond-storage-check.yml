@@ -24,10 +24,9 @@ jobs:
         working-directory: packages/contracts
         run: |
           forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo "matrix={}" >> "$GITHUB_OUTPUT"
-          echo $GITHUB_OUTPUT
     
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ toJSON(steps.set-matrix.outputs.matrix) }}
 
   check_storage_layout:
     needs: provide_contracts
