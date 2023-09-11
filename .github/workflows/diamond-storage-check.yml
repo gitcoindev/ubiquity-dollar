@@ -1,4 +1,4 @@
-name: Check diamond facets storage
+name: Check diamond storage
 
 on:
   push:
