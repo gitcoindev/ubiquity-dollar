@@ -23,7 +23,7 @@ jobs:
       - id: set-matrix
         working-directory: packages/contracts
         run: |
-          forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 > facets.txt 
+          forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo {}.sol:{} >> facets.txt 
           echo "::set-output name=matrix::$(cat facets.txt | jq -R -s -c 'split("\n")[:-1]')"
     
     outputs:
