@@ -47,6 +47,7 @@ library LibChef {
         // Bonus multiplier for early Governance Token makers.
         uint256 governanceMultiplier;
         uint256 minPriceDiffToUpdateMultiplier;
+        uint256 howAboutThis;
         uint256 lastPrice;
         uint256 governanceDivider;
         // Info of each pool.
