@@ -50,3 +50,5 @@ jobs:
 
       - name: Install storage layout
         uses: Rubilmax/foundry-storage-check@main
+        with:
+          contract: ${{ matrix.contract }}
