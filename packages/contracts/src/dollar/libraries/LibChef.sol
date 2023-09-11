@@ -48,6 +48,7 @@ library LibChef {
         uint256 governanceMultiplier;
         uint256 minPriceDiffToUpdateMultiplier;
         uint256 howAboutThis;
+        uint256 findMe;
         uint256 lastPrice;
         uint256 governanceDivider;
         // Info of each pool.
