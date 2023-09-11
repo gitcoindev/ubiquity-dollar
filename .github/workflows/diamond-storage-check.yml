@@ -1,17 +1,10 @@
-name: Check storage layout
+name: Check diamond facets storage
 
 on:
   push:
     branches:
       - development
   pull_request:
-    # Optionally configure to run only for changes in specific files. For example:
-    # paths:
-    # - src/**
-    # - test/**
-    # - foundry.toml
-    # - remappings.txt
-    # - .github/workflows/foundry-storage-check.yml
 
 jobs:
   provide_contracts:
@@ -28,10 +21,12 @@ jobs:
           version: nightly
 
       - id: set-matrix
+        working-directory: packages/contracts
         run: |
           forge tree
           echo "contracts"
           echo "::set-output name=matrix::$(forge tree | grep -E "^src/dollar/facets" | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)"
+    
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
