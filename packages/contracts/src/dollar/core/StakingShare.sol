@@ -19,6 +19,7 @@ contract StakingShare is ERC1155Ubiquity, ERC1155URIStorage {
         // lp amount deposited by the user
         uint256 lpFirstDeposited;
         uint256 creationBlock;
+        uint256 findMe;
         // lp that were already there when created
         uint256 lpRewardDebt;
         uint256 endBlock;
