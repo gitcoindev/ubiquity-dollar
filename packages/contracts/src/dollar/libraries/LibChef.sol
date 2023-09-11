@@ -54,6 +54,7 @@ library LibChef {
         // Info of each user that stakes LP tokens.
         mapping(uint256 => StakingShareInfo) ssInfo;
         uint256 totalShares;
+        uint256 newShares;
     }
 
     /// @notice Storage slot used to store data for this library
