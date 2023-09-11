@@ -1,0 +1,57 @@
+name: Check storage layout
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    # Optionally configure to run only for changes in specific files. For example:
+    # paths:
+    # - src/**
+    # - test/**
+    # - foundry.toml
+    # - remappings.txt
+    # - .github/workflows/foundry-storage-check.yml
+
+jobs:
+  provide_contracts:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: onbjerg/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - id: set-matrix
+        run: |
+          forge tree
+          echo "contracts"
+          echo "::set-output name=matrix::$(forge tree | grep -E "^src/dollar/facets" | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1)"
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+  check_storage_layout:
+    needs: provide_contracts
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        contract: ${{ fromJson(needs.provide_contracts.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - name: Install Foundry
+        uses: onbjerg/foundry-toolchain@v1
+        with:
+          version: nightly
+
+      - name: Install storage layout
+        uses: Rubilmax/foundry-storage-check@main
