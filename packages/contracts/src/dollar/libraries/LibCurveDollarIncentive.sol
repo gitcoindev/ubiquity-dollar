@@ -31,6 +31,7 @@ library LibCurveDollarIncentive {
     /// @notice Struct used as a storage for the current library
     struct CurveDollarData {
         bool isSellPenaltyOn;
+        uint32 findMe3;
         bool isBuyIncentiveOn;
         mapping(address => bool) _exempt;
     }
