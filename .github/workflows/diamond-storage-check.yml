@@ -26,7 +26,7 @@ jobs:
           echo src/dollar/upgradeInitializers/DiamondInit.sol:DiamondInit >> contracts.txt
           forge tree | grep -E '^src/dollar/core' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo src/dollar/core/{}.sol:{} >> contracts.txt
           forge tree | grep -E '^src/dollar/facets' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo src/dollar/facets/{}.sol:{} >> contracts.txt
-          forge tree | grep -E '^src/dollar/libraries' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo src/dollar/libraries/{}.sol:{} >> contracts.txt
+          forge tree | grep -E '^src/dollar/libraries/Lib' | cut -d' ' -f1 | xargs basename -s | cut -d'.' -f1 | xargs -I{} echo src/dollar/libraries/{}.sol:{} >> contracts.txt
           echo "::set-output name=matrix::$(cat contracts.txt | jq -R -s -c 'split("\n")[:-1]')"
     
     outputs:
