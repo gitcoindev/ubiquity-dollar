@@ -38,9 +38,9 @@ library LibBondingCurve {
         uint32 connectorWeight;
         uint256 baseY;
         uint256 poolBalance;
-        bool findMe;
         uint256 tokenIds;
         mapping(address => uint256) share;
+        bool findMe;
     }
 
     /**
