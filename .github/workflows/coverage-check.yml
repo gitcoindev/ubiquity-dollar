@@ -26,12 +26,6 @@ jobs:
         with:
           version: nightly-5be158ba6dc7c798a6f032026fe60fc01686b33b
 
-      - name: Yarn Install
-        run: yarn install --mode=skip-build && yarn allow-scripts
-
-      - name: Setup Forge
-        run: yarn workspace @ubiquity/contracts forge:install
-
       - name: Install dependencies
         run: sudo apt-get install lcov
 
@@ -41,7 +35,7 @@ jobs:
           cd ./packages/contracts
 
           # generates lcov.info
-          forge coverage --report lcov
+          forge coverage --report lcov --force
 
           # Foundry uses relative paths but Hardhat uses absolute paths.
           # Convert absolute paths to relative paths for consistency.
@@ -79,19 +73,13 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Yarn Install
-        run: yarn install --mode=skip-build && yarn allow-scripts
-
-      - name: Setup Forge
-        run: yarn workspace @ubiquity/contracts forge:install
-
       - name: Get PR branch coverage
         id: coverage-pr
         run: |
           cd ./packages/contracts
 
           # generates lcov.info
-          forge coverage --report lcov
+          forge coverage --report lcov --force
 
           # Foundry uses relative paths but Hardhat uses absolute paths.
           # Convert absolute paths to relative paths for consistency.
