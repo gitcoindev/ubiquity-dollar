@@ -19,6 +19,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: development
+          submodules: recursive
 
       - name: Setup Foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -69,10 +70,8 @@ jobs:
 
       - name: Checkout code in PR branch
         uses: actions/checkout@v3
-
-      - name: Update Forge Dependencies
-        working-directory: packages/contracts
-        run: forge update lib/forge-std
+        with:
+          submodules: recursive
 
       - name: Get PR branch coverage
         id: coverage-pr
