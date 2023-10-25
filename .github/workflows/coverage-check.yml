@@ -33,11 +33,12 @@ jobs:
         working-directory: packages/contracts
         run: |
           # generates lcov.info
+          forge install
           forge build && forge coverage --report lcov
 
           # Foundry uses relative paths but Hardhat uses absolute paths.
           # Convert absolute paths to relative paths for consistency.
-          # sed -i -e 's/\/.*solidity.//g' lcov.info
+          sed -i -e 's/\/.*solidity.//g' lcov.info
 
           # Merge lcov files
           lcov \
