@@ -20,12 +20,10 @@ jobs:
         with:
           ref: development
           path: development
-          submodules: recursive
 
       - name: Checkout code in PR branch
         uses: actions/checkout@v3
         with:
-          submodules: recursive
           path: pr
 
       - name: Setup Foundry
