@@ -23,8 +23,6 @@ jobs:
 
       - name: Checkout code in PR branch
         uses: actions/checkout@v3
-        with:
-          path: pr
 
       - name: Setup Foundry
         uses: foundry-rs/foundry-toolchain@v1
@@ -73,7 +71,7 @@ jobs:
 
       - name: Get PR branch coverage
         id: coverage-pr
-        working-directory: pr/packages/contracts
+        working-directory: packages/contracts
         run: |
           # generates lcov.info
           forge build && forge coverage --report lcov
@@ -121,5 +119,4 @@ jobs:
       - name: Upload test coverage report to coveralls.io
         uses: coverallsapp/github-action@v2
         with:
-          base-path: pr/packages/contracts/
-          file: pr/packages/contracts/filtered-lcov.info
+          file: packages/contracts/filtered-lcov.info
