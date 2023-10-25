@@ -121,5 +121,5 @@ jobs:
       - name: Upload test coverage report to coveralls.io
         uses: coverallsapp/github-action@v2
         with:
-          base-path: pr/
+          base-path: pr/packages/contracts/
           file: pr/packages/contracts/filtered-lcov.info
