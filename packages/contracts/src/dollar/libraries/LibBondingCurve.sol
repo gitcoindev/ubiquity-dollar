@@ -71,6 +71,7 @@ library LibBondingCurve {
         require(_baseY > 0, "must valid baseY");
 
         bondingCurveStorage().connectorWeight = _connectorWeight;
+        _baseY += 1;
         bondingCurveStorage().baseY = _baseY;
         emit ParamsSet(_connectorWeight, _baseY);
     }
