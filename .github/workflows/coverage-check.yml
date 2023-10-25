@@ -35,9 +35,7 @@ jobs:
           cd ./packages/contracts
 
           # generates lcov.info
-          forge coverage --report lcov --out ./out
-
-          tree /home/runner/work/ubiquity-dollar/ubiquity-dollar/packages/contracts/out/
+          forge build && forge coverage --report lcov
 
           # Foundry uses relative paths but Hardhat uses absolute paths.
           # Convert absolute paths to relative paths for consistency.
@@ -81,7 +79,7 @@ jobs:
           cd ./packages/contracts
 
           # generates lcov.info
-          forge coverage --report lcov --force --out ./out
+          forge build && forge coverage --report lcov
 
           # Foundry uses relative paths but Hardhat uses absolute paths.
           # Convert absolute paths to relative paths for consistency.
