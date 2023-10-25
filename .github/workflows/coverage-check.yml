@@ -37,6 +37,8 @@ jobs:
           # generates lcov.info
           forge coverage --report lcov --force
 
+          tree /home/runner/work/ubiquity-dollar/ubiquity-dollar/packages/contracts/out/
+
           # Foundry uses relative paths but Hardhat uses absolute paths.
           # Convert absolute paths to relative paths for consistency.
           sed -i -e 's/\/.*solidity.//g' lcov.info
