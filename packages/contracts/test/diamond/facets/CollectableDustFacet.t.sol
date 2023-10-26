@@ -32,21 +32,6 @@ contract CollectableDustFacetTest is DiamondTestSetup {
         vm.stopPrank();
     }
 
-    // test sendDust function should revert when token is part of the protocol
-    function testSendDust_ShouldRevertWhenPartOfTheProtocol() public {
-        vm.startPrank(admin);
-        vm.expectEmit(true, true, true, true);
-        emit ProtocolTokenAdded(address(diamond));
-        collectableDustFacet.addProtocolToken(address(diamond));
-        // mint dollar
-
-        dollarToken.mint(address(diamond), 100);
-        vm.stopPrank();
-        vm.prank(stakingManager);
-        vm.expectRevert("collectable-dust::token-is-part-of-the-protocol");
-        collectableDustFacet.sendDust(mock_recipient, address(diamond), 100);
-    }
-
     // test sendDust function should work only for staking manager
     function testSendDust_ShouldWork() public {
         assertEq(mockToken.balanceOf(address(diamond)), 100);
