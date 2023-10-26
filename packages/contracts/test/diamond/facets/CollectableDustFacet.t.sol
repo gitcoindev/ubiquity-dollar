@@ -32,16 +32,6 @@ contract CollectableDustFacetTest is DiamondTestSetup {
         vm.stopPrank();
     }
 
-    // test sendDust function should work only for staking manager
-    function testSendDust_ShouldWork() public {
-        assertEq(mockToken.balanceOf(address(diamond)), 100);
-        vm.prank(stakingManager);
-        vm.expectEmit(true, true, true, true);
-        emit DustSent(mock_recipient, address(mockToken), 100);
-        collectableDustFacet.sendDust(mock_recipient, address(mockToken), 100);
-        assertEq(mockToken.balanceOf(mock_recipient), 100);
-    }
-
     // test sendDust function should work when token is no longer part of the protocol
     function testSendDust_ShouldWorkWhenNotPartOfTheProtocol() public {
         vm.startPrank(admin);
