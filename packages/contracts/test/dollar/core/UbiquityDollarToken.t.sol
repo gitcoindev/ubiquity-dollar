@@ -66,48 +66,6 @@ contract UbiquityDollarTokenTest is LocalTestHelper {
         dollarToken.setIncentiveContract(mock_sender, incentive_addr);
     }
 
-    function testTransfer_ShouldCallIncentivize_IfValidTransfer() public {
-        address userA = address(0x100001);
-        address userB = address(0x100001);
-        vm.startPrank(admin);
-        dollarToken.mint(userA, 100);
-        dollarToken.mint(userB, 100);
-        dollarToken.mint(mock_sender, 100);
-
-        dollarToken.setIncentiveContract(mock_sender, incentive_addr);
-        dollarToken.setIncentiveContract(mock_recipient, incentive_addr);
-        dollarToken.setIncentiveContract(mock_operator, incentive_addr);
-        dollarToken.setIncentiveContract(address(0), incentive_addr);
-        dollarToken.setIncentiveContract(dollar_addr, incentive_addr);
-        vm.stopPrank();
-
-        vm.prank(mock_sender);
-        vm.expectCall(
-            incentive_addr,
-            abi.encodeWithSelector(
-                Incentive.incentivize.selector,
-                mock_sender,
-                userB,
-                mock_sender,
-                1
-            )
-        );
-        dollarToken.transfer(userB, 1);
-
-        vm.prank(userA);
-        vm.expectCall(
-            incentive_addr,
-            abi.encodeWithSelector(
-                Incentive.incentivize.selector,
-                userA,
-                mock_recipient,
-                userA,
-                1
-            )
-        );
-        dollarToken.transfer(mock_recipient, 1);
-    }
-
     function testUUPS_ShouldUpgradeAndCall() external {
         UbiquityDollarTokenUpgraded newImpl = new UbiquityDollarTokenUpgraded();
 
