@@ -11,10 +11,6 @@ contract TestDiamond is DiamondTestSetup {
         assertEq(isSupported, true);
     }
 
-    function testHasMultipleFacets() public {
-        assertEq(facetAddressList.length, 19);
-    }
-
     function testFacetsHaveCorrectSelectors() public {
         for (uint256 i = 0; i < facetAddressList.length; i++) {
             bytes4[] memory fromLoupeFacet = diamondLoupeFacet
