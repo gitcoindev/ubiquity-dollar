@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.19;
 
+import "forge-std/console.sol";
 import "../DiamondTestSetup.sol";
 import {IMetaPool} from "../../../src/dollar/interfaces/IMetaPool.sol";
 import {MockMetaPool} from "../../../src/dollar/mocks/MockMetaPool.sol";
@@ -339,5 +340,28 @@ contract UbiquityPoolFacetTest is DiamondTestSetup {
         ubiquityPoolFacet.collectRedemption(address(collateral));
         assertGt(collateral.balanceOf(fourthAccount), balanceCollateralBefore);
         vm.stopPrank();
+    }
+
+    function testCollateralTwap() public {
+        vm.createSelectFork("https://uk.rpc.blxrbdn.com");
+
+        IMetaPool lusdCurveMetapool = IMetaPool(
+            0xEd279fDD11cA84bEef15AF5D39BB4d4bEE23F0cA
+        );
+        uint collateralPriceCurve3Pool = lusdCurveMetapool
+            .get_price_cumulative_last()[0];
+
+        // `TWAPOracle.price1Average` from https://etherscan.io/address/0x7944d5b8f9668AfB1e648a61e54DEa8DE734c1d1
+        uint256 curve3PriceUSD = 1070382318565289624;
+
+        // Simulates `calcMintDollarAmount()`
+        // https://github.com/ubiquity/ubiquity-dollar/blob/7a70182d49a0b9dc947c9925a5d28edc49c28b0d/packages/contracts/src/dollar/libraries/LibUbiquityPool.sol#L382
+        uint dollarsOut = (100e18 * collateralPriceCurve3Pool) / curve3PriceUSD;
+
+        console.log(dollarsOut); // 239561778028138198473828282508546106
+
+        // So for 100 LUSD as a collateral input user
+        // gets ~239561778028138198.47 Dollars which seems
+        // to be wrong.
     }
 }
