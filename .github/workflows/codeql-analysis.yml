@@ -1,10 +1,10 @@
 name: CodeQL Analysis
 
-on: workflow_dispatch
-  # push:
-  #  branches:
-  #    - development
-  # pull_request:  ## temporarily disable for pull requests until https://github.com/ubiquity/ubiquity-dollar/issues/876 is resolved.
+on:
+  push:
+   branches:
+     - development
+  pull_request:
 
 jobs:
   code-ql-analysis:
