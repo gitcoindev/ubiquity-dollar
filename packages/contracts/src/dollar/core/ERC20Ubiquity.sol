@@ -41,6 +41,8 @@ abstract contract ERC20Ubiquity is
         uint256 _amount
     );
 
+    // add comment
+
     /// @notice Modifier checks that the method is called by a user with the "pauser" role
     modifier onlyPauser() {
         require(

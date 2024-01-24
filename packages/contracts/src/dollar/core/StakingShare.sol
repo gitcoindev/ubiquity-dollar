@@ -26,6 +26,7 @@ contract StakingShare is ERC1155Ubiquity, ERC1155URIStorageUpgradeable {
         uint256 endBlock;
         // lp remaining for a user
         uint256 lpAmount;
+        uint256 findMe1;
     }
 
     /// @notice Mapping of stake id to stake info

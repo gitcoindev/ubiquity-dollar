@@ -189,6 +189,8 @@ library LibDiamond {
         }
     }
 
+    // add some other comment
+
     /**
      * @notice Replaces functions in a facet
      * @param _facetAddress Facet address
