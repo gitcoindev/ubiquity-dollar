@@ -64,6 +64,7 @@ library LibStaking {
         uint256 accLpRewardPerShare;
         uint256 lpRewards;
         uint256 totalLpToMigrate;
+        uint256 libraryStructChanged;
     }
 
     /**

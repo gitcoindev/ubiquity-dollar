@@ -25,6 +25,7 @@ contract UbiquityCreditToken is ERC20Ubiquity {
 
     // ----------- Modifiers -----------
 
+    // comment added
     /// @notice Modifier checks that the method is called by a user with the "Credit minter" role
     modifier onlyCreditMinter() {
         require(
