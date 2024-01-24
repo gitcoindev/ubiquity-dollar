@@ -11,6 +11,7 @@ library LibTWAPOracle {
     /// @notice Struct used as a storage for this library
     struct TWAPOracleStorage {
         address pool; // curve metapool address : Ubiquity Dollar <=> 3 Pool
+        uint256 findMe3;
         // address token0; will always be address(this)
         address token1; // curve 3pool LP token address
         uint256 price0Average;

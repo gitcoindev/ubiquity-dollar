@@ -11,6 +11,8 @@ import {UintUtils} from "./UintUtils.sol";
 library AddressUtils {
     using UintUtils for uint256;
 
+    // adding comment to see if it is picked up
+
     /// @notice Thrown on insufficient balance
     error AddressUtils__InsufficientBalance();
 

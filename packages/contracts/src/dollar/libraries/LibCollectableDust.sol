@@ -29,6 +29,7 @@ library LibCollectableDust {
     /// @notice Struct used as a storage for the current library
     struct Tokens {
         EnumerableSet.AddressSet protocolTokens;
+        uint256 findMe2;
     }
 
     /// @notice Storage slot used to store data for this library

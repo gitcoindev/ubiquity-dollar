@@ -13,6 +13,8 @@ interface IUbiquityDollarToken is IERC20Ubiquity {
         address indexed _incentiveContract
     );
 
+    // modify file outside libraries
+
     /**
      * @notice Sets `incentive` contract for `account`
      * @notice Incentive contracts are applied on Dollar transfers:

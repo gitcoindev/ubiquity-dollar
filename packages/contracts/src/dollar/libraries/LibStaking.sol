@@ -60,6 +60,7 @@ library LibStaking {
     /// @notice Struct used as a storage for the current library
     struct StakingData {
         uint256 stakingDiscountMultiplier;
+        string findMe;
         uint256 blockCountInAWeek;
         uint256 accLpRewardPerShare;
         uint256 lpRewards;
