@@ -14,6 +14,8 @@ interface IBondingCurve {
      */
     function setParams(uint32 _connectorWeight, uint256 _baseY) external;
 
+    // interface comment added
+
     /**
      * @notice Returns `connectorWeight` value
      * @return Connector weight value
